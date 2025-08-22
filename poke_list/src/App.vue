@@ -1,5 +1,4 @@
 <script setup>
-import PokeApi from './components/PokeApi.vue'
 </script>
 
 <template>
@@ -7,9 +6,9 @@ import PokeApi from './components/PokeApi.vue'
   </header>
 
   <main>
+    <RouterView />
   </main>
-
-  <PokeApi />
+  
 </template>
 
 <style scoped>

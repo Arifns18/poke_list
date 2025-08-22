@@ -55,7 +55,10 @@ export default {
   <div v-if="loading">Loading Pokémon...</div>
   <div v-else>
     <ol>
-      <li v-for = "pokemon in filteredPokemons" :key="pokemon.name">
+      <router-link 
+      v-for = "pokemon in filteredPokemons" 
+      :key="pokemon.id"
+      :to="`/pokemon/${pokemon.id}`">
         
         <img
           :src="pokemon.sprites.front_default"
@@ -65,7 +68,7 @@ export default {
         <div class="container">
           <h4><b>{{pokemon.name}}</b></h4>
         </div>
-      </li>
+      </router-link>
     </ol>
 </div>
 </template>

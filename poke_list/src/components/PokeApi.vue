@@ -22,9 +22,11 @@ export default {
 
 <template>
   <h1>Pokemon List</h1>
-  <p v-for = "item in list" :key="item.name">
-  {{item.name}}
-  {{item.url}}
-  </p>
+  <ol>
+    <li v-for = "item in list" :key="item.name">
+    {{item.name}}
+    {{item.url}}
+    </li>
+  </ol>
 </template>
 

@@ -7,8 +7,17 @@ export default {
   data () {
     return {
       list:[],
+      search: "",
       loading: true,
     }
+  },
+  computed: {
+    filteredPokemons() {
+      // return pokemons that match search input
+      return this.list.filter((p) =>
+        p.name.toLowerCase().includes(this.search.toLowerCase())
+      );
+    },
   },
 
   async mounted() {
@@ -34,11 +43,19 @@ export default {
 </script>
 
 <template>
+  <h1>Pokémon List</h1>
+
+    <!-- Search Input -->
+    <input
+      v-model="search"
+      type="text"
+      placeholder="Search Pokémon..."
+      class="border p-2 rounded w-full mb-4"
+    />
   <div v-if="loading">Loading Pokémon...</div>
   <div v-else>
-    <h1>Pokémon List</h1>
     <ol>
-      <li v-for = "pokemon in list" :key="pokemon.name">
+      <li v-for = "pokemon in filteredPokemons" :key="pokemon.name">
         
         <img
           :src="pokemon.sprites.front_default"
@@ -46,7 +63,7 @@ export default {
           class="mx-auto"
         />
         <div class="container">
-          <h4><b>J{{pokemon.name}}</b></h4>
+          <h4><b>{{pokemon.name}}</b></h4>
         </div>
       </li>
     </ol>

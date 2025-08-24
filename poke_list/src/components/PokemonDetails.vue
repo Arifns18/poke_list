@@ -1,6 +1,21 @@
+  <script setup>
+  import { onMounted, ref } from "vue";
+  import { useRoute } from "vue-router";
+  import { usePokemonStore } from '../stores/pokemonDetails'
+
+  const route = useRoute();
+  const store = usePokemonStore();
+
+  const newName = ref("");
+
+  onMounted(() => {
+    store.fetchPokemon(route.params.id);
+  });
+  </script>
+
   <script>
   import axios from "axios";
-  
+
   export default {
     props: ["id"],
     data() {
@@ -28,18 +43,26 @@
 
     <div v-if="loading">Loading Pokémon details...</div>
 
-    <div v-else class="mt-6 text-center">
-      <h1 class="text-3xl font-bold capitalize mb-4">{{ pokemon.name }}</h1>
-      <img :src="pokemon.sprites.other['official-artwork'].front_default" class="mx-auto w-48" />
-      <p class="mt-2">Height: {{ pokemon.height }}</p>
-      <p>Weight: {{ pokemon.weight }}</p>
+    <div v-else-if="store.current">
+      <h1 class="text-3xl capitalize">{{ store.current.name }}</h1>
+      <img
+        :src="store.current.sprites.other['official-artwork'].front_default"
+        class="w-48 mx-auto"
+      />
 
-      <h2 class="text-xl font-semibold mt-4">Abilities</h2>
-      <ul>
-        <li v-for="a in pokemon.abilities" :key="a.ability.name">
-          {{ a.ability.name }}
-        </li>
-      </ul>
+      <p>Height: {{ store.current.height }}</p>
+      <p>Weight: {{ store.current.weight }}</p>
+
+      <!-- Edit Pokémon Name (local only) -->
+      <div class="mt-4">
+        <input v-model="newName" placeholder="New name" class="border p-2 rounded" />
+        <button
+          @click="store.updatePokemonName(newName)"
+          class="ml-2 px-4 py-2 bg-blue-500 text-white rounded"
+        >
+          Update Name
+        </button>
+      </div>
     </div>
   </div>
 </template>

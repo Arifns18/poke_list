@@ -54,3 +54,9 @@ npm run dev
 ```
 
 After running npm run dev, your app will be available at the URL shown in the terminal (usually http://localhost:5173).
+
+### Known issue
+In effort to publish the project to Github page, the routing is affected. This result the project to run on http://localhost:5173/poke_list/ and showing blank page. To counteract this, click on the home button to load the Pokemon list.
+<img width="1268" height="496" alt="image" src="https://github.com/user-attachments/assets/689aced8-e7a9-46ce-8a0e-431dabe1e75f" />
+
+

@@ -5,7 +5,7 @@
 
   const route = useRoute();
   const store = usePokemonStore();
-  const editing = ref(false); // edit mode
+  const editing = ref(false);
 
   const newName = ref("");
 
@@ -31,16 +31,50 @@
           style="max-width: 150px;"
         />
         <div class="ms-3">
-          <div v-if="editing">
-            <input v-model="newName" :placeholder="store.current.name" class="border p-2 rounded" />
+          <div v-if="editing" class="mb-3">
+            <div class="mb-2">
+              <label for="name" class="form-label fw-bold">Name:</label>
+              <input 
+                id="name" 
+                v-model="newName" 
+                :placeholder="store.current.name" 
+                class="form-control" 
+                type="text"
+              />
+            </div>
+
+            <div class="row mb-2">
+              <div class="col-md-6">
+                <label for="height" class="form-label fw-bold">Height (m):</label>
+                <input 
+                  id="height" 
+                  v-model.number="newHeight" 
+                  :placeholder="store.current.height / 10" 
+                  class="form-control" 
+                  type="number" 
+                  step="0.1"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="weight" class="form-label fw-bold">Weight (kg):</label>
+                <input 
+                  id="weight" 
+                  v-model.number="newWeight" 
+                  :placeholder="store.current.weight / 10" 
+                  class="form-control" 
+                  type="number" 
+                  step="0.1"
+                />
+              </div>
+            </div>
           </div>
           <div v-else>
             <h2  class="fw-bold text-capitalize">
               {{ store.current.name }}<small class="text-muted">#{{ store.current.id }}</small>
           </h2>
-          </div>
           <p><strong>Height:</strong> {{ store.current.height / 10 }} m</p>
           <p><strong>Weight:</strong> {{ store.current.weight / 10 }} kg</p>
+          </div>
         </div>
       </div>
       <hr />
@@ -81,21 +115,13 @@
         </div>
       </div>
 
-      <div class="mt-4">
-        <button @click="store.updatePokemonName(newName), editing = false" class="ml-2 px-4 py-2 rounded">Save</button>
+      <div v-if="editing" class="mt-4">
+        <button @click="store.updatePokemon(newName, newHeight, newWeight), editing = false" class="ml-2 px-4 py-2 rounded">Save</button>
+        <button @click="editing = false" class="ml-2 px-4 py-2 rounded">Cancel</button>
+      </div>
+      <div v-else class="mt-4">
         <button @click="editing = true" class="ml-2 px-4 py-2 rounded">Edit</button>
       </div>
     </div>
   </div>
 </template>
-
-      <!-- <div class="mt-4">
-        <input v-model="newName" :placeholder="store.current.name" class="border p-2 rounded" />
-        <button
-          @click="store.updatePokemonName(newName)"
-          class="ml-2 px-4 py-2 rounded"
-        >
-          Update name
-        </button>
-        <button @click="editing = true" class="ml-2 px-4 py-2 rounded">Edit</button>
-      </div> -->

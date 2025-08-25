@@ -8,7 +8,7 @@ const search = ref("");
 // Load Pokémon list when component mounts
 onMounted(() => {
   if (!store.list.length) {
-    store.fetchList(100);
+    store.fetchList(100, 20);
   }
 });
 

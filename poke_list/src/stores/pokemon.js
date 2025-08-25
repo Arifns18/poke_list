@@ -40,12 +40,12 @@ export const usePokemonStore = defineStore("pokemon", {
       }
     },
     updatePokemon(newName, newHeight, newWeight) {
-      this.updatePokemonName(newName)
+      if(newName){
+        this.updatePokemonName(newName)
+      }
       if(Number.isNaN(newHeight) && Number.isNaN(newWeight)){
         this.updatePokemonBmi(newHeight, newWeight)
       }
-      
-
     },
 
     updatePokemonName(newName) {

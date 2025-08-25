@@ -30,26 +30,31 @@ const filteredPokemons = computed(() =>
             placeholder="Search Pokémon..."
           />
     </div>
-    
     <div v-if="store.loading">Loading Pokémon...</div>
-    <div v-else
-      v-for="pokemon in filteredPokemons" 
-      :key="pokemon.id"
-      class="row"
-    >
-      <router-link 
-      class="card text-center" 
-      :to="`/pokemon/${pokemon.id}`"
-      >
-        <h5 class="card-header">{{ pokemon.name }}</h5>
-        <div class="card-body">
-          <img
-          :src="pokemon.sprites.front_default"
-          :alt="pokemon.name"
-          class="mx-auto w-100"
-          />
-        </div>
-      </router-link>
+    <div v-else class="row g-3">
+      <div v-for="pokemon in filteredPokemons" :key="pokemon.id" class="col-sm-3 mb-3 mb-sm-0">
+        <router-link 
+          class="card text-center text-decoration-none " 
+          :to="`/pokemon/${pokemon.id}`"
+          >
+            <h5 class="card-header">{{ pokemon.name }}</h5>
+            <div class="card-body">
+              <img
+              :src="pokemon.sprites.front_default"
+              :alt="pokemon.name"
+              class="mx-auto w-100"
+              />
+            </div>
+          </router-link>
+      </div>      
     </div>
-
 </template>
+
+<style scoped>
+::v-deep(.card-header) {
+  background-color: #0d6dfd;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+</style>

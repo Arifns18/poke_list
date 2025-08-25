@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, computed, ref } from "vue";
-import { usePokemonStore } from "../stores/pokemonList";
+import { usePokemonStore } from "../stores/pokemon";
 
 const store = usePokemonStore();
 const search = ref("");
@@ -30,7 +30,11 @@ const filteredPokemons = computed(() =>
             placeholder="Search Pokémon..."
           />
     </div>
-    <div v-if="store.loading">Loading Pokémon...</div>
+    <div v-if="store.loading" class="text-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
     <div v-else class="row g-3">
       <div v-for="pokemon in filteredPokemons" :key="pokemon.id" class="col-sm-3 mb-3 mb-sm-0">
         <router-link 

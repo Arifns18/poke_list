@@ -56,5 +56,4 @@ const filteredPokemons = computed(() =>
   color: #fff;
   font-size: 1.5rem;
 }
-
 </style>

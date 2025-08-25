@@ -32,6 +32,15 @@ rm poke_list/index.html
 rm poke_list/package.json
 rm poke_list/src/App.vue
 rm poke_list/src/main.js
+rm poke_list/.editorconfig
+rm poke_list/.gitattributes
+rm poke_list/.gitignore
+rm poke_list/README.md
+rm poke_list/eslint.config.js
+rm poke_list/jsconfig.json
+rm poke_list/package-lock.json
+rm poke_list/public/favicon.ico
+rm poke_list/vite.config.js
 ```
 
 ### 3. Initialize Git and Fetch Repository
